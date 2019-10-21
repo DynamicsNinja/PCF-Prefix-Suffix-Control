@@ -1,0 +1,51 @@
+.Fic\.PrefixSuffixControl .suffix {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    color: black;
+    margin-left: 14px; 
+    font: inherit;
+  }
+
+.Fic\.PrefixSuffixControl .container {
+    display: inline-block;
+    position: relative;
+    font-family: SegoeUI, "Segoe UI";
+    font-size: 14px;
+    font-stretch: 100%;
+    font-style: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-weight: 600;
+    width: 100%;
+}
+  
+.Fic\.PrefixSuffixControl input {
+    height: 33px;
+    padding: 0px 7px;
+    font:inherit;
+    border: 1px solid white;
+    width: -webkit-fill-available;
+}
+
+.Fic\.PrefixSuffixControl input:focus + .suffix {
+    font-weight: 400;
+}
+
+.Fic\.PrefixSuffixControl input:focus {
+    outline: none;
+    border: 1px solid black;
+    font-weight: 400;
+}
+
+.Fic\.PrefixSuffixControl input:hover + .suffix {
+    font-weight: 400;
+}
+
+.Fic\.PrefixSuffixControl input:hover {
+    outline: none;
+    border: 1px solid black;
+    font-weight: 400;
+}
