@@ -54,3 +54,12 @@
     opacity: 1;
     color: black;
 }
+
+.Fic\.PrefixSuffixControl input[type="number"]::-webkit-outer-spin-button,
+.Fic\.PrefixSuffixControl input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.Fic\.PrefixSuffixControl input[type="number"] {
+    -moz-appearance: textfield;
+}
