@@ -1,7 +1,7 @@
 .Fic\.PrefixSuffixControl .suffix {
     position: absolute;
     left: 0;
-    line-height: 35px;
+    line-height: 35px !important;
     color: black;
     margin-left: 14px; 
     font: inherit;
@@ -48,4 +48,9 @@
     outline: none;
     border: 1px solid black;
     font-weight: 400;
+}
+
+.Fic\.PrefixSuffixControl input::-webkit-input-placeholder {
+    opacity: 1;
+    color: black;
 }
