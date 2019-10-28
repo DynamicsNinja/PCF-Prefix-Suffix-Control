@@ -62,7 +62,7 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 	public getOutputs(): IOutputs
 	{
 		return {
-			valueField: this._value || 0
+			valueField: this._value!
 		};
 	}
 
@@ -75,12 +75,7 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 
 	public textboxOnChange():void{
 		this._value = this._textbox.value == "" ? null : +this._textbox.value;
-		if(this._value == null){
-			this._textbox.value = "0";
-			const width = this.getTextWidth(this._textbox.value);
-			this._suffix.hidden = this._textbox.value == "";
-			this._suffix.style.left = width + 'px';
-		}
+		this._suffix.hidden = this._textbox.value == "";
 		this._notifyOutputChanged();
 	}
 
