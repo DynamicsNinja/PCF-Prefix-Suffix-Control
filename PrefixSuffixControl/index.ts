@@ -33,12 +33,14 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 		textbox.addEventListener("change", this._textboxOnChange);
 		textbox.addEventListener('input', this._updateSuffix);
 		textbox.addEventListener('focus', this._updateSuffix);
-		textbox.value =this._value+"";
+		textbox.placeholder = "---";
+		if(this._value != null){ textbox.value = this._value +""; }
 		textbox.pattern = "[0-9.]";
 
 		let suffix = document.createElement("span");
 		suffix.innerHTML = suffixString;
 		suffix.classList.add("suffix");
+		suffix.hidden = this._value == null;
 		this._suffix = suffix;
 
 		this._textbox = textbox;
@@ -74,6 +76,7 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 		if(this._value == null){
 			this._textbox.value = "0";
 			const width = this.getTextWidth(this._textbox.value);
+			this._suffix.hidden = this._textbox.value == "";
 			this._suffix.style.left = width + 'px';
 		}
 		this._notifyOutputChanged();
@@ -81,6 +84,7 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 
 	public updateSuffix():void {
 		const width = this.getTextWidth(this._textbox.value);
+		this._suffix.hidden = this._textbox.value == "";
 		this._suffix.style.left = width + 'px';		
 	}
 
