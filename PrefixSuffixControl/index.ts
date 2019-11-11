@@ -11,6 +11,8 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 	private _textbox: HTMLInputElement;
 	private _suffix: HTMLSpanElement;
 
+	private _isLockedField: boolean;
+
 	private _value: number | null;
 	
 	public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container:HTMLDivElement)
@@ -50,13 +52,15 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 
 		container.appendChild(outerContainer);
 
-		const width = this.getTextWidth(this._textbox.value);
+		const width = this.getTextWidth(this._textbox);
 		this._suffix.style.left = width + 'px';
 	}
 
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
+		this._isLockedField = context.mode.isControlDisabled;
+		this._textbox.disabled = this._isLockedField;
 	}
 
 	public getOutputs(): IOutputs
@@ -80,16 +84,25 @@ export class PrefixSuffixControl implements ComponentFramework.StandardControl<I
 	}
 
 	public updateSuffix():void {
-		const width = this.getTextWidth(this._textbox.value);
+		const width = this.getTextWidth(this._textbox);
 		this._suffix.hidden = this._textbox.value == "";
 		this._suffix.style.left = width + 'px';		
 	}
 
-	public getTextWidth(text:string) {
-		var canvas = document.createElement("canvas");
-		var context = canvas.getContext("2d");
-		context!.font = '600 14px Segoe UI';
-		var metrics = context!.measureText(text);
-		return metrics.width;
+	public getTextWidth(textbox:HTMLInputElement) {
+		var tag = document.createElement("div");
+		tag.style.position = "absolute";
+		tag.style.left = "-999em";
+		tag.style.whiteSpace = "nowrap";
+		tag.style.font = window.getComputedStyle(textbox).font;
+		tag.innerHTML = textbox.value;
+	
+		document.body.appendChild(tag);
+	
+		var result = tag.clientWidth;
+	
+		document.body.removeChild(tag);
+	
+		return result;
 	}
 }
